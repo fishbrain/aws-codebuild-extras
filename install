@@ -18,8 +18,7 @@ case "$CODEBUILD_GIT_BRANCH" in
   pr-*) export CODEBUILD_PULL_REQUEST=`expr substr $CODEBUILD_GIT_BRANCH 4 32`
 esac
 
-#FIXME - this is incorrect for dash
-#export CODEBUILD_PROJECT=${CODEBUILD_BUILD_ID%:$CODEBUILD_LOG_PATH}
+export CODEBUILD_PROJECT=`echo $CODEBUILD_BUILD_ID|cut -d: -f1`
 export CODEBUILD_BUILD_URL=https://$AWS_DEFAULT_REGION.console.aws.amazon.com/codebuild/home?region=$AWS_DEFAULT_REGION#/builds/$CODEBUILD_BUILD_ID/view/new
 
 # Set Fishbrain Environment
